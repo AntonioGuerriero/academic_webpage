@@ -30,7 +30,6 @@ tags: []
 # Display this page in the Featured widget?
 featured: true
 
----
 
 title: 'Microservices integrated performance and reliability testing'
 
