@@ -79,4 +79,4 @@ highlight_name: true
 
 Antonio Guerriero is a post doc researcher at University of Naples Federico II. Her research interests include software testing, software reliability, and artificial intelligence testing.
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
+#{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
