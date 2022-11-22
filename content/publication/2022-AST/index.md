@@ -1,13 +1,14 @@
 ---
-title: 'Assessing Black-box Test Case Generation Techniques for Microservices'
+
+title: 'Microservices integrated performance and reliability testing'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-  - Giamattei Luca
+  - Camilli Matteo
   - Guerriero Antonio 
-  - Pietrantuono Roberto
+  - Russo Barbara
   - Russo Stefano
 
 # Author notes (optional)
@@ -22,8 +23,8 @@ author_notes:
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *International Conference on the Quality of Information and Communications Technology*
-publication_short: In *QUATIC 2022*
+publication: In *International Conference on Automation of Software Test*
+publication_short: In *AST 2022*
 
 tags: []
 
