@@ -1,5 +1,5 @@
 ---
-title: 'Assessing Black-box Test Case Generation Techniques for Microservices'
+title: 'Learning-to-rank vs ranking-to-learn: Strategies for regression testing in continuous integration'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
@@ -22,8 +22,8 @@ publication_types: ['1']
 publishDate: "2020-01-01T00:00:00Z"
 
 # Publication name and optional abbreviated publication name.
-publication: In *International Conference on the Quality of Information and Communications Technology*
-publication_short: In *QUATIC 2022*
+publication: In *International Conference on Software Engineering*
+publication_short: In *ICSE 2020*
 
 tags: []
 
