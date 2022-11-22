@@ -10,7 +10,7 @@ last_name: Guerriero
 superuser: true
 
 # Role/position/tagline
-role: Post doc
+role: Ph.D.
 
 # Organizations/Affiliations to show in About widget
 organizations:
