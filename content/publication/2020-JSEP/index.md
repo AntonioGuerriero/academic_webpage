@@ -20,7 +20,7 @@ publishDate: "2020-01-01T00:00:00Z"
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "*Journal of Software: Evolution and Process"
+publication: "Journal of Software: Evolution and Process"
 publication_short: ""
 
 

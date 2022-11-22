@@ -7,14 +7,14 @@ title: 'Reliability Evaluation of ML systems, the oracle problem'
 authors:
   - Guerriero Antonio
 
+# Schedule page publish date (NOT publication's date).
+publishDate: "2020-01-01T00:00:00Z"
+
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
 publication_types: ['1']
-
-# Schedule page publish date (NOT publication's date).
-publishDate: "2020-01-01T00:00:00Z"
 
 # Publication name and optional abbreviated publication name.
 publication: In *International Symposium on Software Reliability Engineering Workshops*
