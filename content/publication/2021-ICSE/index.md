@@ -1,20 +1,13 @@
 ---
-
-title: 'Microservices integrated performance and reliability testing'
+title: 'Operation is the hardest teacher: estimating DNN accuracy looking for mispredictions'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-  - Camilli Matteo
   - Guerriero Antonio 
-  - Russo Barbara
+  - Pietrantuono Roberto
   - Russo Stefano
-
-# Author notes (optional)
-# author_notes:
-#   - 'Equal contribution'
-#   - 'Equal contribution'
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
@@ -23,8 +16,8 @@ authors:
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *International Conference on Automation of Software Test*
-publication_short: In *AST 2022*
+publication: In *International Conference on Software Engineering*
+publication_short: In *ICSE 2021*
 
 tags: []
 
