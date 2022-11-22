@@ -22,6 +22,9 @@ authors:
 # 7 = Thesis; 8 = Patent
 publication_types: ['1']
 
+# Schedule page publish date (NOT publication's date).
+publishDate: "2022-01-01T00:00:00Z"
+
 # Publication name and optional abbreviated publication name.
 publication: In *International Conference on Automation of Software Test*
 publication_short: In *AST 2022*
