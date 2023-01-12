@@ -5,9 +5,9 @@ title: 'Operation is the hardest teacher: estimating DNN accuracy looking for mi
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-  - Guerriero Antonio 
-  - Pietrantuono Roberto
-  - Russo Stefano
+  - Antonio Guerriero
+  - Roberto Pietrantuono 
+  - Stefano Russo 
 
 # Schedule page publish date (NOT publication's date).
 publishDate: "2021-01-01T00:00:00Z"

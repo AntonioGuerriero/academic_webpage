@@ -1,12 +1,12 @@
 ---
 title: "DevOpRET: Continuous reliability testing in DevOps"
 authors:
-- Bertolino Antonia
-- De Angelis Guglielmo 
-- Guerriero Antonio 
-- Miranda Breno 
-- Pietrantuono Roberto 
-- Russo Stefano
+- Antonia Bertolino
+- Guglielmo De Angelis 
+- Antonio Guerriero 
+- Breno Miranda 
+- Roberto Pietrantuono 
+- Stefano Russo 
 
 doi: ""
 

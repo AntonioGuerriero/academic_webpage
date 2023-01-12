@@ -5,9 +5,9 @@ title: 'Testing microservice architectures for operational reliability'
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-  - Pietrantuono Roberto
-  - Russo Stefano
-  - Guerriero Antonio 
+  - Roberto Pietrantuono
+  - Stefano Russo
+  - Antonio Guerriero 
 
 # Schedule page publish date (NOT publication's date).
 publishDate: "2020-01-01T00:00:00Z"

@@ -5,10 +5,10 @@ title: 'A hybrid framework for web services reliability and performance assessme
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-  - Guerriero Antonio 
-  - Mirandola Raffaela
-  - Pietrantuono Roberto
-  - Russo Stefano
+  - Antonio Guerriero
+  - Raffaela Mirandola
+  - Roberto Pietrantuono 
+  - Stefano Russo 
   
 # Schedule page publish date (NOT publication's date).
 publishDate: "2019-01-01T00:00:00Z"
