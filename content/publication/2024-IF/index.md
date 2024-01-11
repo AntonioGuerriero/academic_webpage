@@ -1,30 +1,19 @@
 ---
-title: 'Monitoring tools for DevOps and microservices: A systematic grey literature review'
+title: 'Federated learning for IoT devices: Enhancing TinyML with on-board training'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-  - L Giamattei 
-  - A Guerriero 
-  - R Pietrantuono
-  - S Russo
-  - I Malavolta
-  - T Islam
-  - M Dinga
-  - A Koziolek
-  - Snigdha Singh
-  - Martin Armbruster
-  - JM Gutiérrez Martínez
-  - S Caro-Alvaro
-  - D Rodríguez García
-  - S Weber
-  - J Henss
-  - E Fernandez Vogelin
-  - F Simon Panojo 
+  - Massimo Ficco
+  - Antonio Guerriero
+  - Elio Milite
+  - Francesco Palmieri
+  - Roberto Pietrantuono 
+  - Stefano Russo 
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2023-12-1T00:00:00Z"
+publishDate: "2024-1-2T00:00:00Z"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
@@ -33,8 +22,8 @@ publishDate: "2023-12-1T00:00:00Z"
 publication_types: ['2']
 
 # Publication name and optional abbreviated publication name.
-publication: "Journal of Systems and Software"
-publication_short: In *JSS*
+publication: "Information Fusion"
+publication_short: In *IF*
 
 tags: []
 

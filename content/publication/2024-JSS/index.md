@@ -1,30 +1,17 @@
 ---
-title: 'Monitoring tools for DevOps and microservices: A systematic grey literature review'
+title: 'Automated functional and robustness testing of microservice architectures'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-  - L Giamattei 
-  - A Guerriero 
-  - R Pietrantuono
-  - S Russo
-  - I Malavolta
-  - T Islam
-  - M Dinga
-  - A Koziolek
-  - Snigdha Singh
-  - Martin Armbruster
-  - JM Gutiérrez Martínez
-  - S Caro-Alvaro
-  - D Rodríguez García
-  - S Weber
-  - J Henss
-  - E Fernandez Vogelin
-  - F Simon Panojo 
+  - Luca Giamattei
+  - Antonio Guerriero
+  - Roberto Pietrantuono 
+  - Stefano Russo 
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2023-12-1T00:00:00Z"
+publishDate: "2024-1-1T00:00:00Z"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
