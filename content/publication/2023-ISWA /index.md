@@ -20,8 +20,8 @@ publishDate: "2023-01-01T00:00:00Z"
 publication_types: ['2']
 
 # Publication name and optional abbreviated publication name.
-publication: "Intelligent Systems with Applications"
-publication_short: In *ISWA*
+publication: In *Intelligent Systems with Applications*
+# publication_short: In *ISWA*
 
 tags: []
 

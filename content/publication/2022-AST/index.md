@@ -27,8 +27,8 @@ publishDate: "2022-01-01T00:00:00Z"
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *International Conference on Automation of Software Test*
-publication_short: In *AST 2022*
+publication: In *International Conference on Automation of Software Test (AST 2022)*
+# publication_short: In *AST 2022*
 
 tags: []
 

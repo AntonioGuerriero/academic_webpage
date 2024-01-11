@@ -21,8 +21,8 @@ publishDate: "2023-12-01T00:00:00Z"
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *International Conference on Service-Oriented Computing*
-publication_short: In *ICSOC 2023*
+publication: In *International Conference on Service-Oriented Computing (ICSOC 2023)*
+# publication_short: In *ICSOC 2023*
 
 tags: []
 

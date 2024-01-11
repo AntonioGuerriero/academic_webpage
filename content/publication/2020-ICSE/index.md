@@ -21,8 +21,8 @@ publishDate: "2020-01-01T00:00:00Z"
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *International Conference on Software Engineering*
-publication_short: In *ICSE 2020*
+publication: In *International Conference on Software Engineering (ICSE 2020)*
+# publication_short: In *ICSE 2020*
 
 tags: []
 

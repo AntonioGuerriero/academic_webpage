@@ -17,8 +17,8 @@ publishDate: "2020-01-01T00:00:00Z"
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *International Symposium on Software Reliability Engineering Workshops*
-publication_short: In *ISSREW 2020*
+publication: In *International Symposium on Software Reliability Engineering Workshops (ISSREW 2020)*
+# publication_short: In *ISSREW 2020*
 
 tags: []
 

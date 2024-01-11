@@ -19,7 +19,7 @@ publishDate: "2018-01-01T00:00:00Z"
 publication_types: ['2']
 
 # Publication name and optional abbreviated publication name.
-publication: In *International Symposium on Software Reliability Engineering 2018*
+publication: In *International Symposium on Software Reliability Engineering (ISSRE 2018)*
 #publication_short: In *ISSRE 2018*
 
 tags: []
