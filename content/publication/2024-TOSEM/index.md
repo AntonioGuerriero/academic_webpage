@@ -1,19 +1,17 @@
 ---
-title: 'Federated learning for IoT devices: Enhancing TinyML with on-board training'
+title: 'Causality-driven Testing of Autonomous Driving Systems'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
-  - Massimo Ficco
+  - Luca Giamattei
   - Antonio Guerriero
-  - Elio Milite
-  - Francesco Palmieri
   - Roberto Pietrantuono 
   - Stefano Russo 
 
 # Schedule page publish date (NOT publication's date).
-publishDate: "2024-03-02T00:00:00Z"
+publishDate: "2024-02-02T00:00:00Z"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
@@ -22,7 +20,7 @@ publishDate: "2024-03-02T00:00:00Z"
 publication_types: ['2']
 
 # Publication name and optional abbreviated publication name.
-publication: In *Information Fusion*
+publication: In *ACM Transactions on Software Engineering and Methodology*
 # publication_short: In *IF*
 
 tags: []
