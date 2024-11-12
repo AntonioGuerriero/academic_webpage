@@ -22,7 +22,7 @@ publishDate: "2024-04-01T00:00:00Z"
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *5th ACM/IEEE International Conference on Automation of Software Test*
+publication: In *5th ACM/IEEE International Conference on Automation of Software Test (AST 2024)*
 # publication_short: In *JSS*
 
 tags: []

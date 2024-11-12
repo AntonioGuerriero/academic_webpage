@@ -19,7 +19,7 @@ publishDate: "2024-04-01T00:00:00Z"
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *IEEE/ACM 46th International Conference on Software Engineering*
+publication: In *IEEE/ACM 46th International Conference on Software Engineering (ICSE 2024)*
 # publication_short: In *JSS*
 
 tags: []

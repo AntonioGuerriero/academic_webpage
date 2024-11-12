@@ -23,7 +23,7 @@ publishDate: "2024-06-01T00:00:00Z"
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *IEEE International Conference on Web Services*
+publication: In *IEEE International Conference on Web Services (ICWS 2024)*
 # publication_short: In *JSS*
 
 tags: []
