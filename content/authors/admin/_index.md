@@ -14,8 +14,8 @@ role: Ph.D.
 
 # Organizations/Affiliations to show in About widget
 organizations:
-  - name: University of Salerno
-    url: https://www.unina.it/
+  - name: Università degli Studi di Salerno
+    url: https://www.unisa.it/
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interests include software testing, software reliability, and Artificial Intelligence.
@@ -64,6 +64,6 @@ email: ''
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
-Ph.D. in Information Technologies and Electrical Engineering (ITEE) and member of IoT Research Lab at University of Salerno.
+Ph.D. in Information Technologies and Electrical Engineering (ITEE) and member of IoT Research Lab at Università degli Studi di Salerno.
 His research interests include software testing, software reliability, and testing of autonomous systems.
 
