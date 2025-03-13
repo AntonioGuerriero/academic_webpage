@@ -20,8 +20,8 @@ publishDate: "2022-12-01T00:00:00Z"
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In * IEEE 22nd International Conference on Software Quality, Reliability and Security (QRS 2022)*
-# publication_short: In *QRS 2022*
+publication: In * IEEE 22nd International Conference on Software Quality, Reliability and Security*
+publication_short: In *QRS 2022*
 
 tags: []
 

@@ -20,7 +20,7 @@ publication_types: ['2']
 
 # Publication name and optional abbreviated publication name.
 publication: "Software Testing, Verification and Reliability"
-# publication_short: In *STVR 2020*
+publication_short: In *STVR 2020*
 
 tags: []
 

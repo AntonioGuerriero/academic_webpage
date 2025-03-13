@@ -20,8 +20,8 @@ publishDate: "2022-01-01T00:00:00Z"
 publication_types: ['1']
 
 # Publication name and optional abbreviated publication name.
-publication: In *International Conference on the Quality of Information and Communications Technology (QUATIC 2022)*
-# publication_short: In *QUATIC 2022*
+publication: In *International Conference on the Quality of Information and Communications Technology*
+publication_short: In *QUATIC 2022*
 
 tags: []
 
