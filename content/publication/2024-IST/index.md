@@ -1,5 +1,5 @@
 ---
-title: 'Causal reasoning in Software Quality Assurance: A systematic review.'
+title: 'Causal reasoning in Software Quality Assurance: A systematic review'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
