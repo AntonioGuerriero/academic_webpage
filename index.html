@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antonio Guerriero</title>
+  <link rel="icon" href="assets/media/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f8f9fa;
+      --text: #1a1a1a;
+      --text-muted: #6b7280;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --border: #e5e7eb;
+      --tag-conf: #dbeafe;
+      --tag-conf-text: #1e40af;
+      --tag-jour: #d1fae5;
+      --tag-jour-text: #065f46;
+      --nav-height: 60px;
+      --max-w: 760px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f1117;
+      --bg-alt: #1a1d27;
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --accent: #60a5fa;
+      --accent-light: #1e2a3a;
+      --border: #2d3141;
+      --tag-conf: #1e2a3a;
+      --tag-conf-text: #93c5fd;
+      --tag-jour: #0d2a1f;
+      --tag-jour-text: #6ee7b7;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    [data-theme="dark"] nav {
+      background: rgba(15, 17, 23, 0.92);
+    }
+
+    nav .inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .name {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    #theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: border-color 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+
+    #theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Layout ── */
+    main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child { border-bottom: none; }
+
+    h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* ── About ── */
+    #about .profile {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    #about .photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--bg-alt);
+      border: 2px solid var(--border);
+      object-fit: cover;
+    }
+
+    #about .photo-placeholder {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--bg-alt);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: var(--text-muted);
+      user-select: none;
+    }
+
+    #about h1 {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 2px;
+    }
+
+    #about .role {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    #about .affiliation a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    #about .affiliation a:hover { text-decoration: underline; }
+
+    #about .bio {
+      margin-top: 16px;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    #about .links {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    #about .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    #about .links a:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    /* ── Interests & Education ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .two-col h3 {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .two-col ul {
+      list-style: none;
+    }
+
+    .two-col ul li {
+      padding: 5px 0;
+      font-size: 14px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .two-col ul li::before {
+      content: '—';
+      color: var(--accent);
+      font-weight: 300;
+      flex-shrink: 0;
+    }
+
+    .edu-item { margin-bottom: 14px; }
+
+    .edu-item .degree {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .edu-item .institution {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .edu-item .year {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    /* ── Publications ── */
+    .year-group { margin-bottom: 40px; }
+
+    .year-group:last-child { margin-bottom: 0; }
+
+    .year-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pub-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pub-item:last-child { border-bottom: none; }
+
+    .pub-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .pub-authors {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .pub-venue {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .pub-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .tag-conf { background: var(--tag-conf); color: var(--tag-conf-text); }
+    .tag-jour { background: var(--tag-jour); color: var(--tag-jour-text); }
+
+    /* ── Contact ── */
+    #contact .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 14px;
+    }
+
+    .contact-item .label {
+      min-width: 72px;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-top: 1px;
+    }
+
+    .contact-item a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      #about .profile { flex-direction: column; gap: 20px; }
+      .two-col { grid-template-columns: 1fr; gap: 24px; }
+      section { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="#about" class="name">Antonio Guerriero</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Toggle dark mode">
+        <svg id="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- About -->
+    <section id="about">
+      <div class="profile">
+        <img class="photo" src="assets/avatar.jpg" alt="Antonio Guerriero" />
+        <div>
+          <h1>Antonio Guerriero</h1>
+          <p class="role">Ph.D.</p>
+          <p class="affiliation">
+            IoT Research Lab &middot;
+            <a href="https://www.unisa.it/">Università degli Studi di Salerno</a>
+          </p>
+          <p class="bio">
+            Ph.D. in Information Technologies and Electrical Engineering (ITEE).
+            His research interests include software testing, software reliability,
+            and testing of autonomous systems.
+          </p>
+          <div class="links">
+            <a href="https://scholar.google.com/citations?user=oyH9mWYAAAAJ&hl=it" target="_blank" rel="noopener">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5z"/></svg>
+              Google Scholar
+            </a>
+            <a href="https://www.linkedin.com/in/antonio-guerriero-311517245/" target="_blank" rel="noopener">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="mailto:antonio.guerriero@unina.it">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Email
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <h3>Research Interests</h3>
+          <ul>
+            <li>Artificial Intelligence</li>
+            <li>Software Reliability</li>
+            <li>Software Testing</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Education</h3>
+          <div class="edu-item">
+            <p class="degree">PhD in Information Technology and Electrical Engineering</p>
+            <p class="institution">University of Naples Federico II</p>
+            <p class="year">2022</p>
+          </div>
+          <div class="edu-item">
+            <p class="degree">M.Sc. in Computer Engineering</p>
+            <p class="institution">University of Naples Federico II</p>
+            <p class="year">2018</p>
+          </div>
+          <div class="edu-item">
+            <p class="degree">B.Sc. in Computer Engineering</p>
+            <p class="institution">University of Naples Federico II</p>
+            <p class="year">2014</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <h2>Publications</h2>
+
+      <div class="year-group">
+        <p class="year-label">2026</p>
+
+        <div class="pub-item">
+          <p class="pub-title">Model-Heterogeneous Federated Learning for TinyML in IoT</p>
+          <p class="pub-authors">A. Guerriero, G.P. Rimoli, P. Fusco, F. Palmieri, M. Ficco</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">International Conference on Artificial Intelligence, Computer, Data Sciences and Applications (AICDS 2026)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <p class="year-label">2025</p>
+
+        <div class="pub-item">
+          <p class="pub-title">Causal reasoning in Software Quality Assurance: A systematic review</p>
+          <p class="pub-authors">Luca Giamattei, Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">Information and Software Technology (IST)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">On-device training and pruning for energy saving and continuous learning in resource-constrained MCUs</p>
+          <p class="pub-authors">P. Fusco, G.P. Rimoli, A. Guerriero, F. Palmieri, M. Ficco</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">Future Generation Computer Systems</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Multivariate anomaly detection and root cause analysis of energy issues in microservice-based systems</p>
+          <p class="pub-authors">B.R. Sanchez, Luca Giamattei, Antonio Guerriero, Roberto Pietrantuono, Ivano Malavolta</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">Journal of Systems and Software (JSS)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Adaptive Probabilistic Operational Testing for Large Language Models Evaluation</p>
+          <p class="pub-authors">A. Asgari, Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE/ACM International Conference on Automation of Software Test (AST 2025)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Microservices Performance Testing with Causality-enhanced Large Language Models</p>
+          <p class="pub-authors">C. Mascia, Antonio Guerriero, Luca Giamattei, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE/ACM International Conference on AI Foundation Models and Software Engineering (CAIN 2025)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Learning-based Automated Generation of Critical Workload Configurations for Microservices Performance Testing</p>
+          <p class="pub-authors">C. Mascia, Luca Giamattei, Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE International Conference on Web Services (ICWS 2025)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Detecting DDoS Attacks in Microservice Architectures via AI-Based Agents</p>
+          <p class="pub-authors">G. Benedetti, L. Caviglione, A. Falcone, M. Ficco, M. Guarascio, Antonio Guerriero</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">International Conference on Computational Science and Its Applications (ICCSA 2025)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">A benchmark for DDoS attacks detection in microservice architectures</p>
+          <p class="pub-authors">M. Ficco, P. Fusco, Antonio Guerriero, Roberto Pietrantuono, M. Russo, F. Palmieri</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">International Conference on Computing, Networking and Communications (ICNC 2025)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <p class="year-label">2024</p>
+
+        <div class="pub-item">
+          <p class="pub-title">DeepSample: DNN sampling-based testing for operational accuracy assessment</p>
+          <p class="pub-authors">Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE/ACM 46th International Conference on Software Engineering (ICSE 2024)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Causality-driven testing of autonomous driving systems</p>
+          <p class="pub-authors">Luca Giamattei, Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">ACM Transactions on Software Engineering and Methodology (TOSEM)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Federated learning for IoT devices: Enhancing TinyML with on-board training</p>
+          <p class="pub-authors">Massimo Ficco, Antonio Guerriero, Elio Milite, Francesco Palmieri, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">Information Fusion</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Monitoring tools for DevOps and microservices: A systematic grey literature review</p>
+          <p class="pub-authors">L. Giamattei, A. Guerriero, R. Pietrantuono, S. Russo, I. Malavolta, T. Islam, M. Dinga, A. Koziolek, et al.</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">Journal of Systems and Software (JSS)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Automated functional and robustness testing of microservice architectures</p>
+          <p class="pub-authors">Luca Giamattei, Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">Journal of Systems and Software (JSS)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Identifying performance issues in microservice architectures through causal reasoning</p>
+          <p class="pub-authors">Luca Giamattei, Antonio Guerriero, Ivano Malavolta, Cristian Mascia, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">ACM/IEEE International Conference on Automation of Software Test (AST 2024)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Anomaly detection and root cause analysis of microservices energy consumption</p>
+          <p class="pub-authors">Maximilian Stefan Floroiu, Stefano Russo, Luca Giamattei, Antonio Guerriero, Ivano Malavolta, Roberto Pietrantuono</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE International Conference on Web Services (ICWS 2024)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <p class="year-label">2023</p>
+
+        <div class="pub-item">
+          <p class="pub-title">DevOpRET: Continuous reliability testing in DevOps</p>
+          <p class="pub-authors">Antonia Bertolino, Guglielmo De Angelis, Antonio Guerriero, Breno Miranda, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">Journal of Software: Evolution and Process (JSEP)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Assessing operational accuracy of CNN-based image classifiers using an oracle surrogate</p>
+          <p class="pub-authors">Antonio Guerriero, Michael R. Lyu, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">Intelligent Systems with Applications (ISWA)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Iterative Assessment and Improvement of DNN Operational Accuracy</p>
+          <p class="pub-authors">Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">ICSE – New Ideas and Emerging Results (ICSE-NIER 2023)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">An empirical evaluation of the energy and performance overhead of monitoring tools on docker-based systems</p>
+          <p class="pub-authors">Madalina Dinga, Ivano Malavolta, Luca Giamattei, Antonio Guerriero, Roberto Pietrantuono</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">International Conference on Service-Oriented Computing (ICSOC 2023)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <p class="year-label">2022</p>
+
+        <div class="pub-item">
+          <p class="pub-title">Microservices integrated performance and reliability testing</p>
+          <p class="pub-authors">Matteo Camilli, Antonio Guerriero, Andrea Janes, Barbara Russo, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">ACM/IEEE International Conference on Automation of Software Test (AST 2022)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Automated grey-box testing of microservice architectures</p>
+          <p class="pub-authors">Luca Giamattei, Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE 22nd International Conference on Software Quality, Reliability and Security (QRS 2022)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Assessing black-box test case generation techniques for microservices</p>
+          <p class="pub-authors">Luca Giamattei, Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">International Conference on the Quality of Information and Communications Technology (QUATIC 2022)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <p class="year-label">2021</p>
+
+        <div class="pub-item">
+          <p class="pub-title">Operation is the hardest teacher: estimating DNN accuracy looking for mispredictions</p>
+          <p class="pub-authors">Antonio Guerriero, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE/ACM 43rd International Conference on Software Engineering (ICSE 2021)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <p class="year-label">2020</p>
+
+        <div class="pub-item">
+          <p class="pub-title">Learning-to-rank vs ranking-to-learn: Strategies for regression testing in continuous integration</p>
+          <p class="pub-authors">Antonia Bertolino, Antonio Guerriero, Breno Miranda, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">ACM/IEEE 42nd International Conference on Software Engineering (ICSE 2020)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Testing microservice architectures for operational reliability</p>
+          <p class="pub-authors">Roberto Pietrantuono, Stefano Russo, Antonio Guerriero</p>
+          <div class="pub-meta">
+            <span class="tag tag-jour">Journal</span>
+            <span class="pub-venue">Software Testing, Verification and Reliability (STVR)</span>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Reliability Evaluation of ML systems, the oracle problem</p>
+          <p class="pub-authors">Antonio Guerriero</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE International Symposium on Software Reliability Engineering Workshops (ISSREW 2020)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <p class="year-label">2019</p>
+
+        <div class="pub-item">
+          <p class="pub-title">A hybrid framework for web services reliability and performance assessment</p>
+          <p class="pub-authors">Antonio Guerriero, Raffaela Mirandola, Roberto Pietrantuono, Stefano Russo</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE International Symposium on Software Reliability Engineering Workshops (ISSREW 2019)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <p class="year-label">2018</p>
+
+        <div class="pub-item">
+          <p class="pub-title">Run-time reliability estimation of microservice architectures</p>
+          <p class="pub-authors">Roberto Pietrantuono, Stefano Russo, Antonio Guerriero</p>
+          <div class="pub-meta">
+            <span class="tag tag-conf">Conference</span>
+            <span class="pub-venue">IEEE 29th International Symposium on Software Reliability Engineering (ISSRE 2018)</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <span class="label">Email</span>
+          <a href="mailto:antguerriero@unisa.it">antguerriero@unisa.it</a>
+        </div>
+        <div class="contact-item">
+          <span class="label">Address</span>
+          <span>Via Giovanni Paolo II, 132, 84084 Fisciano (SA), Italy</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Antonio Guerriero
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const moon = document.getElementById('icon-moon');
+    const sun = document.getElementById('icon-sun');
+
+    const saved = localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      moon.style.display = 'none';
+      sun.style.display = '';
+    }
+
+    toggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      moon.style.display = isDark ? '' : 'none';
+      sun.style.display = isDark ? 'none' : '';
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>
