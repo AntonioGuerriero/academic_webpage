@@ -73,7 +73,7 @@ def pub_html(pub: dict) -> str:
 def build_publications_section(pubs_by_year: dict) -> str:
     lines = ["    <!-- Publications -->", "    <section id=\"publications\">",
              "      <h2>Publications</h2>", ""]
-    for year in sorted(pubs_by_year.keys(), reverse=True):
+    for year in sorted(pubs_by_year.keys(), key=lambda y: int(y) if str(y).isdigit() else 0, reverse=True):
         lines.append(f"      <div class=\"year-group\">")
         lines.append(f"        <p class=\"year-label\">{year}</p>")
         for pub in pubs_by_year[year]:
