@@ -1,149 +1,117 @@
 #!/usr/bin/env python3
 """
-Fetch publications from Google Scholar and update the publications
-section in index.html.
+Update the publications section of index.html from a Google Scholar export.
+
+How to get the file:
+    Google Scholar profile -> tick the select-all box -> Export -> CSV
 
 Usage:
-    pip install scholarly
-    python update_publications.py
+    python update_publications.py path/to/citations.csv
+
+No dependencies, no scraping: the CSV is exported by hand, so Scholar
+cannot block the script.
 """
 
-from scholarly import scholarly
-from collections import defaultdict
+import csv
+import html
 import re
+import sys
+from collections import defaultdict
 
-SCHOLAR_ID = "oyH9mWYAAAAJ"
+ME = "guerriero"
 
-JOURNAL_KEYWORDS = [
-    "journal", "transactions", "letters", "review", "magazine",
-    "information fusion", "software testing, verification",
-    "intelligent systems with applications",
-    "future generation computer systems",
-]
+CONF_WORDS = ("conference", "symposium", "workshop", "proceedings")
 
-CONF_KEYWORDS = [
-    "conference", "symposium", "workshop", "proceedings",
-    "international conference", "icse", "issta", "ast", "qrs",
-]
+# Scholar lowercases some acronyms in titles
+ACRONYMS = {"cnn": "CNN", "ddos": "DDoS"}
+
+# Scholar's CSV truncates long author lists at this many names
+MAX_AUTHORS = 10
+
+
+def clean_title(title: str) -> str:
+    return " ".join(ACRONYMS.get(w.lower(), w) for w in title.strip().split(" "))
+
+
+def clean_venue(venue: str) -> str:
+    venue = re.sub(r"^Proceedings of the\s+", "", venue.strip())
+    return re.sub(r"^20\d\d\s+", "", venue)
 
 
 def pub_type(venue: str) -> str:
-    v = venue.lower()
-    if any(k in v for k in JOURNAL_KEYWORDS):
-        return "journal"
-    if any(k in v for k in CONF_KEYWORDS):
-        return "conf"
-    # fallback: if venue starts with "proceedings" or has year pattern like ICSE 20XX
-    if re.search(r"\b(20\d\d)\b", venue) or v.startswith("proc"):
-        return "conf"
-    return "journal"
+    return "conf" if any(w in venue.lower() for w in CONF_WORDS) else "journal"
 
 
-def format_authors(authors: str) -> str:
-    """Highlight Antonio Guerriero in the author list."""
-    # BibTeX uses ' and ' as separator
-    parts = [a.strip() for a in re.split(r"\s+and\s+", authors)]
-    highlighted = []
-    for a in parts:
-        if "guerriero" in a.lower():
-            highlighted.append(f"<strong>{a}</strong>")
-        else:
-            highlighted.append(a)
-    return ", ".join(highlighted)
+def format_authors(raw: str) -> str:
+    """'Last, First; Last, First; ' -> 'First Last, First Last', me in bold."""
+    names = []
+    for entry in (e.strip() for e in raw.split(";")):
+        if not entry:
+            continue
+        last, _, first = entry.partition(",")
+        name = f"{first.strip()} {last.strip()}".strip()
+        name = html.escape(name)
+        names.append(f"<strong>{name}</strong>" if ME in name.lower() else name)
+    if len(names) >= MAX_AUTHORS:
+        names.append("et al.")
+    return ", ".join(names)
 
 
-def pub_html(pub: dict) -> str:
-    title = pub.get("title", "").strip()
-    authors = format_authors(pub.get("author", ""))
-    # scholarly stores the venue under different keys depending on the entry
-    venue = next((pub[k].strip() for k in ("journal", "conference", "booktitle", "venue")
-                  if pub.get(k, "").strip()), "")
-    if pub.get("journal", "").strip():
-        ptype = "journal"
-    elif pub.get("conference", "").strip() or pub.get("booktitle", "").strip():
-        ptype = "conf"
-    else:
-        ptype = pub_type(venue)
-    tag_class = "tag-jour" if ptype == "journal" else "tag-conf"
-    tag_label = "Journal" if ptype == "journal" else "Conference"
-
-    meta = f"""
-          <div class="pub-meta">
-            <span class="tag {tag_class}">{tag_label}</span>
-            <span class="pub-venue">{venue}</span>
-          </div>""" if venue else ""
-
+def pub_html(row: dict) -> str:
+    title = html.escape(clean_title(row["Title"]))
+    authors = format_authors(row["Authors"])
+    venue = clean_venue(row["Publication"])
+    ptype = pub_type(venue)
+    tag_class = "tag-conf" if ptype == "conf" else "tag-jour"
+    tag_label = "Conference" if ptype == "conf" else "Journal"
     return f"""
         <div class="pub-item">
           <p class="pub-title">{title}</p>
-          <p class="pub-authors">{authors}</p>{meta}
+          <p class="pub-authors">{authors}</p>
+          <div class="pub-meta">
+            <span class="tag {tag_class}">{tag_label}</span>
+            <span class="pub-venue">{html.escape(venue)}</span>
+          </div>
         </div>"""
 
 
-def build_publications_section(pubs_by_year: dict) -> str:
-    lines = ["    <!-- Publications -->", "    <section id=\"publications\">",
-             "      <h2>Publications</h2>", ""]
-    for year in sorted(pubs_by_year.keys(), key=lambda y: int(y) if str(y).isdigit() else 0, reverse=True):
-        lines.append(f"      <div class=\"year-group\">")
-        lines.append(f"        <p class=\"year-label\">{year}</p>")
-        for pub in pubs_by_year[year]:
-            lines.append(pub_html(pub))
-        lines.append("      </div>")
-        lines.append("")
-    lines.append("    </section>")
+def build_section(by_year: dict) -> str:
+    lines = ['    <!-- Publications -->', '    <section id="publications">',
+             '      <h2>Publications</h2>', '']
+    for year in sorted(by_year, reverse=True):
+        lines.append('      <div class="year-group">')
+        lines.append(f'        <p class="year-label">{year}</p>')
+        lines.extend(pub_html(r) for r in by_year[year])
+        lines.append('      </div>')
+        lines.append('')
+    lines.append('    </section>')
     return "\n".join(lines)
 
 
-def update_html(new_section: str):
-    with open("index.html", "r", encoding="utf-8") as f:
-        html = f.read()
+def main():
+    if len(sys.argv) != 2:
+        sys.exit(__doc__)
 
-    pattern = r"<!-- Publications -->.*?</section>"
-    updated = re.sub(pattern, new_section, html, flags=re.DOTALL)
+    by_year = defaultdict(list)
+    with open(sys.argv[1], newline="", encoding="utf-8-sig") as f:
+        for row in csv.DictReader(f):
+            # committee pages, prefaces and the like have no venue or no year
+            if not row["Publication"].strip() or not row["Year"].strip().isdigit():
+                print(f"skipped: {row['Title'][:70]}")
+                continue
+            by_year[int(row["Year"])].append(row)
 
-    if updated == html:
-        print("WARNING: Could not find publications section to replace.")
-        return
+    with open("index.html", encoding="utf-8") as f:
+        page = f.read()
+    section = build_section(by_year)
+    new_page, n = re.subn(r"<!-- Publications -->.*?</section>",
+                          lambda _: section, page, flags=re.DOTALL)
+    if n != 1:
+        sys.exit("Could not find the publications section in index.html")
 
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(updated)
-    print("index.html updated successfully.")
-
-
-def main():
-    print(f"Fetching publications for Scholar ID: {SCHOLAR_ID}")
-    author = scholarly.search_author_id(SCHOLAR_ID)
-    scholarly.fill(author, sections=["publications"])
-
-    pubs_by_year = defaultdict(list)
-    total = len(author["publications"])
-    print(f"Found {total} publications. Fetching details...")
-
-    for i, pub in enumerate(author["publications"], 1):
-        try:
-            scholarly.fill(pub)
-        except Exception as e:
-            print(f"  [{i}/{total}] Could not fill pub details: {e}")
-
-        bib = pub.get("bib", {})
-        year = bib.get("pub_year", "Unknown")
-        title = bib.get("title", "")
-
-        # skip items with no title or that look like workshop chair messages
-        if not title or len(title) < 10:
-            continue
-
-        # entries without a year are committee pages, prefaces, theses, etc.
-        if not str(year).isdigit():
-            print(f"  [{i}/{total}] skipped (no year) — {title[:60]}")
-            continue
-
-        pubs_by_year[year].append(bib)
-        print(f"  [{i}/{total}] {year} — {title[:60]}")
-
-    section = build_publications_section(pubs_by_year)
-    update_html(section)
-    print("Done.")
+        f.write(new_page)
+    print(f"index.html updated: {sum(map(len, by_year.values()))} publications")
 
 
 if __name__ == "__main__":
