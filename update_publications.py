@@ -41,7 +41,8 @@ def pub_type(venue: str) -> str:
 
 def format_authors(authors: str) -> str:
     """Highlight Antonio Guerriero in the author list."""
-    parts = [a.strip() for a in authors.split(",")]
+    # BibTeX uses ' and ' as separator
+    parts = [a.strip() for a in re.split(r"\s+and\s+", authors)]
     highlighted = []
     for a in parts:
         if "guerriero" in a.lower():
@@ -54,19 +55,28 @@ def format_authors(authors: str) -> str:
 def pub_html(pub: dict) -> str:
     title = pub.get("title", "").strip()
     authors = format_authors(pub.get("author", ""))
-    venue = pub.get("venue", "").strip()
-    ptype = pub_type(venue)
+    # scholarly stores the venue under different keys depending on the entry
+    venue = next((pub[k].strip() for k in ("journal", "conference", "booktitle", "venue")
+                  if pub.get(k, "").strip()), "")
+    if pub.get("journal", "").strip():
+        ptype = "journal"
+    elif pub.get("conference", "").strip() or pub.get("booktitle", "").strip():
+        ptype = "conf"
+    else:
+        ptype = pub_type(venue)
     tag_class = "tag-jour" if ptype == "journal" else "tag-conf"
     tag_label = "Journal" if ptype == "journal" else "Conference"
+
+    meta = f"""
+          <div class="pub-meta">
+            <span class="tag {tag_class}">{tag_label}</span>
+            <span class="pub-venue">{venue}</span>
+          </div>""" if venue else ""
 
     return f"""
         <div class="pub-item">
           <p class="pub-title">{title}</p>
-          <p class="pub-authors">{authors}</p>
-          <div class="pub-meta">
-            <span class="tag {tag_class}">{tag_label}</span>
-            <span class="pub-venue">{venue}</span>
-          </div>
+          <p class="pub-authors">{authors}</p>{meta}
         </div>"""
 
 
@@ -121,6 +131,11 @@ def main():
 
         # skip items with no title or that look like workshop chair messages
         if not title or len(title) < 10:
+            continue
+
+        # entries without a year are committee pages, prefaces, theses, etc.
+        if not str(year).isdigit():
+            print(f"  [{i}/{total}] skipped (no year) — {title[:60]}")
             continue
 
         pubs_by_year[year].append(bib)
