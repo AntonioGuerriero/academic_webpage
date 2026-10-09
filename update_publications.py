@@ -20,6 +20,10 @@ from collections import defaultdict
 
 ME = "guerriero"
 
+# the generated list goes between these two comments in index.html
+START = "<!-- PUBLICATIONS:START -->"
+END = "<!-- PUBLICATIONS:END -->"
+
 CONF_WORDS = ("conference", "symposium", "workshop", "proceedings")
 
 # Scholar lowercases some acronyms in titles
@@ -62,29 +66,25 @@ def pub_html(row: dict) -> str:
     authors = format_authors(row["Authors"])
     venue = clean_venue(row["Publication"])
     ptype = pub_type(venue)
-    tag_class = "tag-conf" if ptype == "conf" else "tag-jour"
-    tag_label = "Conference" if ptype == "conf" else "Journal"
+    label = "Conference" if ptype == "conf" else "Journal"
     return f"""
-        <div class="pub-item">
-          <p class="pub-title">{title}</p>
-          <p class="pub-authors">{authors}</p>
-          <div class="pub-meta">
-            <span class="tag {tag_class}">{tag_label}</span>
-            <span class="pub-venue">{html.escape(venue)}</span>
-          </div>
-        </div>"""
+            <article class="pub" data-type="{ptype}">
+              <h4 class="pub-title">{title}</h4>
+              <p class="pub-authors">{authors}</p>
+              <p class="pub-meta"><span class="pub-type {ptype}">{label}</span><span class="pub-venue">{html.escape(venue)}</span></p>
+            </article>"""
 
 
-def build_section(by_year: dict) -> str:
-    lines = ['    <!-- Publications -->', '    <section id="publications">',
-             '      <h2>Publications</h2>', '']
+def build_list(by_year: dict) -> str:
+    lines = [START]
     for year in sorted(by_year, reverse=True):
-        lines.append('      <div class="year-group">')
-        lines.append(f'        <p class="year-label">{year}</p>')
+        lines.append(f'          <div class="year-group">')
+        lines.append(f'            <h3 class="year-label">{year}</h3>')
+        lines.append('            <div class="year-items">')
         lines.extend(pub_html(r) for r in by_year[year])
-        lines.append('      </div>')
-        lines.append('')
-    lines.append('    </section>')
+        lines.append('            </div>')
+        lines.append('          </div>')
+    lines.append(END)
     return "\n".join(lines)
 
 
@@ -103,11 +103,11 @@ def main():
 
     with open("index.html", encoding="utf-8") as f:
         page = f.read()
-    section = build_section(by_year)
-    new_page, n = re.subn(r"<!-- Publications -->.*?</section>",
-                          lambda _: section, page, flags=re.DOTALL)
+    block = build_list(by_year)
+    new_page, n = re.subn(re.escape(START) + r".*?" + re.escape(END),
+                          lambda _: block, page, flags=re.DOTALL)
     if n != 1:
-        sys.exit("Could not find the publications section in index.html")
+        sys.exit(f"Could not find the {START} / {END} markers in index.html")
 
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(new_page)
